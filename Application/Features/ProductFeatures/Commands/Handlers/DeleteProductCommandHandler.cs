@@ -1,4 +1,5 @@
-﻿using DomainModel.Products;
+﻿using Application.Exceptions;
+using DomainModel.Products;
 using DomainModel.Products.Repositories;
 using Infrastructure.Shared;
 using MediatR;
@@ -26,7 +27,7 @@ namespace Application.Features.ProductFeatures.Commands.Handlers
         {
             var product = await _productWriteRepository.GetByIdAsync(request.Id);
             if (product is null)
-                throw new Exception("محصول مورد نظر یافت نشد");
+                throw new ApplicationServiceNotFoundException("محصول مورد نظر یافت نشد");
 
             _productWriteRepository.Remove(product);
 

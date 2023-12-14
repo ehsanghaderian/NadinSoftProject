@@ -29,7 +29,7 @@ namespace Infrastructure.Helpers.PaginationHelpers
 
         public static IQueryable<T> ToFilters<T>(this IQueryable<T> query, PageQuery pageQuery)
         {
-            if (pageQuery is null)
+            if (pageQuery is null || string.IsNullOrEmpty(pageQuery.SearchInfo.FieldName))
                 return query;
 
             var feildName = pageQuery.SearchInfo.FieldName;

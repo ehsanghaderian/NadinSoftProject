@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using DomainModel.Exceptions;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,7 @@ namespace DomainModel.Users
         private void NameValidation(string name)
         {
             if (string.IsNullOrEmpty(name))
-                throw new Exception("نام کاربر معتبر نمی باشد");
+                throw new DomainServiceException("نام کاربر معتبر نمی باشد");
         }
     }
 }

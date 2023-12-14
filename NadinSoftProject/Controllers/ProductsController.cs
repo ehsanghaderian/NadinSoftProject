@@ -2,6 +2,7 @@
 using Application.Features.ProductFeatures.Queries.Handlers;
 using Infrastructure.Helpers.PaginationHelpers;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using WebApi.Controllers;
 
@@ -31,7 +32,7 @@ namespace NadinSoftProject.Host.Controllers
         public async Task<IActionResult> GetProductByIdAsync(Guid id)
         {
             var query = new GetProductInfoQuery { ProductId = id };
-            return Ok(await Mediator.Send(query));
+            return OkResult(okResult, await Mediator.Send(query));
         }
 
         /// <summary>
@@ -45,7 +46,7 @@ namespace NadinSoftProject.Host.Controllers
             command.CommandSender = this.UserInfo;
             command.Validate();
 
-            return Ok(await Mediator.Send(command));
+            return OkResult(okResult, await Mediator.Send(command));
         }
 
         /// <summary>
@@ -61,7 +62,7 @@ namespace NadinSoftProject.Host.Controllers
             command.CommandSender = this.UserInfo;
             command.Validate();
 
-            return Ok(await Mediator.Send(command));
+            return OkResult(okResult, await Mediator.Send(command));
         }
 
         /// <summary>
@@ -77,7 +78,7 @@ namespace NadinSoftProject.Host.Controllers
             command.CommandSender = this.UserInfo;
             command.Validate();
 
-            return Ok(await Mediator.Send(command));
+            return OkResult(okResult, await Mediator.Send(command));
         }
     }
 }

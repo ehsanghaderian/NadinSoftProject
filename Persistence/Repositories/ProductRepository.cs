@@ -14,9 +14,9 @@ namespace Persistence.Repositories
 {
     public class ProductRepository : IProductRepository
     {
-        private readonly IApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public ProductRepository(IApplicationDbContext context)
+        public ProductRepository(ApplicationDbContext context)
         {
             _context = context;
         }
@@ -33,7 +33,7 @@ namespace Persistence.Repositories
 
         public async Task<Product> GetByIdAsync(Guid id)
         {
-            return await _context.Products.SingleOrDefaultAsync(c => c.Id == id);
+            return await _context.Products.Include(c=> c.OperatorInfo).SingleOrDefaultAsync(c => c.Id == id);
         }
 
         public void Remove(Product product)
@@ -48,7 +48,7 @@ namespace Persistence.Repositories
 
         public async Task<List<Product>> GetAllWithPaginationAsync(PageQuery pageQuery)
         {
-            return await _context.Products.AsNoTracking()
+            return await _context.Products.Include(c=> c.OperatorInfo).AsNoTracking()
                 .Sort(pageQuery)
                 .ToFilters(pageQuery)
                 .ToPaging(pageQuery)

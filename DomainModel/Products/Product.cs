@@ -1,4 +1,5 @@
-﻿using DomainModel.Share;
+﻿using DomainModel.Exceptions;
+using DomainModel.Share;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,8 @@ namespace DomainModel.Products
 {
     public class Product
     {
+        //for orm!
+        private Product(){}
         public Product(string name, DateTime produceDate, string? manufacturerPhone, string manufacturerEmail, bool isAvailable, Guid operatorId, string operatorName)
         {
             EmailValidation(manufacturerEmail);
@@ -48,19 +51,19 @@ namespace DomainModel.Products
             string regex = @"^[^@\s]+@[^@\s]+\.(com|net|org|gov)$";
 
             if (string.IsNullOrEmpty(email) || !Regex.IsMatch(email, regex, RegexOptions.IgnoreCase))
-                throw new Exception("ایمیل سازنده محصول معتبر نمی باشد");
+                throw new DomainServiceException("ایمیل سازنده محصول معتبر نمی باشد");
         }
 
         private void ProductNameValidation(string productName)
         {
             if (string.IsNullOrEmpty(productName))
-                throw new Exception("نام محصول معتبر نمی باشد");
+                throw new DomainServiceException("نام محصول معتبر نمی باشد");
         }
 
         private void ProduceDateValidation(DateTime produceDate)
         {
             if(produceDate ==  DateTime.MinValue || produceDate == DateTime.MaxValue)
-                throw new Exception("تاریخ تولید محصول معتبر نمی باشد");
+                throw new DomainServiceException("تاریخ تولید محصول معتبر نمی باشد");
         }
     }
 }

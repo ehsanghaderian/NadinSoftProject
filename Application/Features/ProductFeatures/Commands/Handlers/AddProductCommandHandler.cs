@@ -1,4 +1,5 @@
-﻿using DomainModel.Products;
+﻿using Application.Exceptions;
+using DomainModel.Products;
 using DomainModel.Products.Repositories;
 using MediatR;
 using System;
@@ -38,7 +39,7 @@ namespace Application.Features.ProductFeatures.Commands.Handlers
             var existProduct = await _productWriteRepository.ExistsProductWithEmailOrProduceDate(email, produceDate);
 
             if (existProduct)
-                throw new Exception();
+                throw new ApplicationServiceBadRequestException("محصولی با این مشخصات موجود می باشد");
         }
     }
 }

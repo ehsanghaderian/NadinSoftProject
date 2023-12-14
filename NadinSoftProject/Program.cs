@@ -2,6 +2,7 @@ using Application;
 using Azure.Identity;
 using DomainModel.Users;
 using DorePardaz.Infrastructure.Helpers;
+using Fino.SahaWarranty.Host.Activator.MiddleWare;
 using Infrastructure.Appsettings;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -27,6 +28,14 @@ builder.Services.AddIdentity<User, IdentityRole<Guid>>(options =>
     })
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddErrorDescriber<PersianIdentityErrorDescribator>();
+
+builder.Services.AddCors(o => o.AddPolicy("Policy", builder =>
+{
+    builder.AllowAnyOrigin()
+        .AllowAnyMethod()
+        .AllowAnyHeader();
+}));
+
 
 #region Swagger
 builder.Services.AddSwaggerGen(c =>
@@ -99,6 +108,7 @@ app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseCors("Policy");
+app.UseCustomExceptionHandler();
 app.UseRouting();
 app.UseAuthorization();
 

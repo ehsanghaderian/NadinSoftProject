@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using Application.Exceptions;
+using AutoMapper;
 using DomainModel.Products;
 using DomainModel.Products.Repositories;
 using Infrastructure.Helpers.PaginationHelpers;
@@ -44,11 +45,11 @@ namespace Application.Features.ProductFeatures.Queries.Handlers
         {
             var product = await _productWriteRepository.GetByIdAsync(query.ProductId);
             if (product is null)
-                throw new Exception();
+                throw new ApplicationServiceNotFoundException("محصول مورد نظر یافت نشد");
 
             var config = new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<Product, ProductItemBriefInfoDto>()
+                cfg.CreateMap<Product, ProductInfoDto>()
 
                 .ForMember(dest => dest.OperatorName, act => act.MapFrom(src => src.OperatorInfo.Name));
             });

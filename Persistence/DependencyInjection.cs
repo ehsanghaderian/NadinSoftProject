@@ -1,4 +1,5 @@
-﻿using Application.Interfaces;
+﻿using Application;
+using Application.Interfaces;
 using DomainModel.Products.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -25,6 +26,7 @@ namespace Persistence
             services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
 
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IUnitOfWork , UnitOfWork>();
         }
     }
 }

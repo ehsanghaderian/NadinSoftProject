@@ -14,18 +14,28 @@ namespace NadinSoftProject.Host.Controllers
             
         }
 
+        /// <summary>
+        /// ثبت نام کاربر
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> Register(RegisterUserCommand command)
         {
-            return Ok(await Mediator.Send(command));
+            return OkResult(okResult, await Mediator.Send(command));
         }
 
+        /// <summary>
+        /// ورود کاربر
+        /// </summary>
+        /// <param name="command"></param>
+        /// <returns></returns>
         [HttpPost("login")]
         [AllowAnonymous]
         public async Task<IActionResult> Login(UserLoginCommand command)
         {
-            return Ok(await Mediator.Send(command));
+            return OkResult(okResult, await Mediator.Send(command));
         }
     }
 }

@@ -2,10 +2,14 @@
 {
     public class SearchInfo
     {
+        public SearchInfo()
+        {
+            this.FieldValue = string.Empty;
+            this.FieldName = string.Empty;
+        }
         private string _operator;
         public string FieldName { get; set; }
         public string FieldValue { get; set; }
-        public string Type { get; set; }
         public string Operator
         {
             get

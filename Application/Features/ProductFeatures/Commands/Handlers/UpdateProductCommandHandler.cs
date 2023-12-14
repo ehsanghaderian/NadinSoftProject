@@ -1,4 +1,5 @@
-﻿using DomainModel.Products;
+﻿using Application.Exceptions;
+using DomainModel.Products;
 using DomainModel.Products.Repositories;
 using Infrastructure.Shared;
 using MediatR;
@@ -26,10 +27,10 @@ namespace Application.Features.ProductFeatures.Commands.Handlers
         {
             var product = await _productWriteRepository.GetByIdAsync(request.Id);
             if (product is null)
-                throw new Exception("محصول مورد نظر یافت نشد");
+                throw new ApplicationServiceNotFoundException("محصول مورد نظر یافت نشد");
 
             if (product.OperatorInfo.Id != request.CommandSender.UserId)
-                throw new Exception("شما مجاز به ویرایش محصول مورد نظر نمی باشید");
+                throw new ApplicationServiceForbiddenException("شما مجاز به ویرایش محصول مورد نظر نمی باشید");
 
             product.Update(request.Name, request.ManufacturerPhone, request.IsAvailable);
 

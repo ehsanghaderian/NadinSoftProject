@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using DomainModel.Users;
+using Application.Exceptions;
 
 namespace Application.Features.UserFeatures.Commands.Handlers
 {
@@ -28,7 +29,7 @@ namespace Application.Features.UserFeatures.Commands.Handlers
             var result = await _userManager.CreateAsync(user, request.Password);
 
             if (result.Errors != null && result.Errors.Any())
-                throw new Exception(result.Errors.FirstOrDefault().Description);
+                throw new ApplicationServiceBadRequestException(result.Errors.FirstOrDefault().Description);
 
             return Unit.Value;
         }

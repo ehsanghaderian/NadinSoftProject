@@ -41,5 +41,28 @@
             <param name="id"></param>
             <returns></returns>
         </member>
+        <member name="M:NadinSoftProject.Host.Controllers.UsersController.Register(Application.Features.UserFeatures.Commands.RegisterUserCommand)">
+            <summary>
+            ثبت نام کاربر
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NadinSoftProject.Host.Controllers.UsersController.Login(Application.Features.UserFeatures.Commands.UserLoginCommand)">
+            <summary>
+            ورود کاربر
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NadinSoftProject.Host.Messages.ResponseMessage.#ctor(System.String)">
+            <inheritdoc />
+        </member>
+        <member name="M:NadinSoftProject.Host.Messages.ResponseMessage.#ctor(System.String,System.Object)">
+            <inheritdoc />
+        </member>
+        <member name="M:NadinSoftProject.Host.Messages.ResponseMessage.ToString">
+            <inheritdoc />
+        </member>
     </members>
 </doc>

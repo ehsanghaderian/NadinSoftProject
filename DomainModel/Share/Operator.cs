@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DomainModel.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,13 +24,13 @@ namespace DomainModel.Share
         private void IdValidation(Guid id)
         {
             if (id == Guid.Empty)
-                throw new Exception("شناسه شخص معتبر نمی باشد");
+                throw new DomainServiceException("شناسه شخص معتبر نمی باشد");
         }
 
         private void NameValidation(string name)
         {
             if (string.IsNullOrEmpty(name))
-                throw new Exception("نام شخض معتبر نمی باشد");
+                throw new DomainServiceException("نام شخض معتبر نمی باشد");
         }
     }
 }

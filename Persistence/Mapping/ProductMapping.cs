@@ -16,6 +16,9 @@ namespace Persistence.Mapping
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Id).ValueGeneratedNever();
 
+            builder.Property(x => x.ManufacturerEmail).IsUnicode(true);
+            builder.Property(x => x.ProduceDate).IsUnicode(true);
+
             builder.OwnsOne(c => c.OperatorInfo);
         }
     }
