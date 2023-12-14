@@ -1,4 +1,5 @@
 ﻿using Application.Interfaces;
+using DomainModel.Products;
 using DomainModel.Users;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -12,6 +13,8 @@ namespace Persistence
             : base(options)
         {
         }
+
+        public DbSet<Product> Products { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

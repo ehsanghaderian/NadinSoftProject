@@ -1,7 +1,9 @@
 ﻿using Application.Interfaces;
+using DomainModel.Products.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Persistence.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
@@ -20,7 +22,9 @@ namespace Persistence
                     configuration.GetConnectionString("Db"),
                     b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
 
-            services.AddScoped<IApplicationDbContext,ApplicationDbContext>();
+            services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
+
+            services.AddScoped<IProductRepository, ProductRepository>();
         }
     }
 }

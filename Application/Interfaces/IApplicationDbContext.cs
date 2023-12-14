@@ -1,4 +1,5 @@
-﻿using DomainModel.Users;
+﻿using DomainModel.Products;
+using DomainModel.Users;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,5 +11,6 @@ namespace Application.Interfaces
 {
     public interface IApplicationDbContext
     {
+        DbSet<Product> Products { get; set; }
     }
 }

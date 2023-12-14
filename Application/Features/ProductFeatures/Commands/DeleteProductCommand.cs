@@ -8,16 +8,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Features.UserFeatures.Commands
+namespace Application.Features.ProductFeatures.Commands
 {
-    public class UserLoginCommand : CommandRequestBase<object>
+    public class DeleteProductCommand : CommandRequestBase
     {
-        public string UserName { get; set;}
-        public string Password { get; set; }
-
+        public Guid Id { get; set; }
         public override void Validate()
         {
-            new UserLoginCommandValidator().Validate(this).RaiseExceptionIfRequired();
         }
     }
 }

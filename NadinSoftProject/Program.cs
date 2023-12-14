@@ -104,4 +104,4 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.Run();
+app.Seed().Run();

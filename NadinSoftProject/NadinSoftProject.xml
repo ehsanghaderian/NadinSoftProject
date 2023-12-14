@@ -4,5 +4,42 @@
         <name>NadinSoftProject.Host</name>
     </assembly>
     <members>
+        <member name="M:NadinSoftProject.Host.Controllers.ProductsController.GetAllProductsBriefInfoAsync(Infrastructure.Helpers.PaginationHelpers.PageQuery)">
+            <summary>
+            دریافت اطلاعات کلی محصولات با Pagination
+            </summary>
+            <param name="pageQuery"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NadinSoftProject.Host.Controllers.ProductsController.GetProductByIdAsync(System.Guid)">
+            <summary>
+            دریافت اطلاعات جزئی محصول با شناسه
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NadinSoftProject.Host.Controllers.ProductsController.AddProductAsync(Application.Features.ProductFeatures.Commands.AddProductCommand)">
+            <summary>
+            افزودن محصول جدید
+            </summary>
+            <param name="command"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NadinSoftProject.Host.Controllers.ProductsController.UpdateProductByIdAsync(Application.Features.ProductFeatures.Commands.UpdateProductCommand,System.Guid)">
+            <summary>
+            ویرایش محصول
+            </summary>
+            <param name="command"></param>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:NadinSoftProject.Host.Controllers.ProductsController.DeleteProductAsync(Application.Features.ProductFeatures.Commands.DeleteProductCommand,System.Guid)">
+            <summary>
+            حذف محصول
+            </summary>
+            <param name="command"></param>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
     </members>
 </doc>
