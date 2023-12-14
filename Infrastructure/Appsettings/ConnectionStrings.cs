@@ -1,6 +1,6 @@
 ﻿namespace NadinSoftProject.Host
 {
-    public class ConnectionString
+    public class ConnectionStrings
     {
         public string Db { get; set; }
     }

@@ -15,6 +15,8 @@ namespace Application
         public static void AddApplication(this IServiceCollection services)
         {
             services.AddMediatR(Assembly.GetExecutingAssembly());
+
+            services.AddScoped<ITokenGenerator , TokenGenerator>();
         }
     }
 }
