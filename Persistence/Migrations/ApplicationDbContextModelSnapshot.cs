@@ -25,7 +25,6 @@ namespace Persistence.Migrations
             modelBuilder.Entity("DomainModel.Products.Product", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("IsAvailable")
@@ -33,6 +32,7 @@ namespace Persistence.Migrations
 
                     b.Property<string>("ManufacturerEmail")
                         .IsRequired()
+                        .IsUnicode(true)
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ManufacturerPhone")
@@ -42,32 +42,13 @@ namespace Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("OperatorInfoId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<DateTime>("ProduceDate")
+                        .IsUnicode(true)
                         .HasColumnType("datetime2");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OperatorInfoId");
-
                     b.ToTable("Products");
-                });
-
-            modelBuilder.Entity("DomainModel.Share.Operator", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Operator");
                 });
 
             modelBuilder.Entity("DomainModel.Users.User", b =>
@@ -273,13 +254,28 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("DomainModel.Products.Product", b =>
                 {
-                    b.HasOne("DomainModel.Share.Operator", "OperatorInfo")
-                        .WithMany()
-                        .HasForeignKey("OperatorInfoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.OwnsOne("DomainModel.Share.Operator", "OperatorInfo", b1 =>
+                        {
+                            b1.Property<Guid>("ProductId")
+                                .HasColumnType("uniqueidentifier");
 
-                    b.Navigation("OperatorInfo");
+                            b1.Property<Guid>("Id")
+                                .HasColumnType("uniqueidentifier");
+
+                            b1.Property<string>("Name")
+                                .IsRequired()
+                                .HasColumnType("nvarchar(max)");
+
+                            b1.HasKey("ProductId");
+
+                            b1.ToTable("Products");
+
+                            b1.WithOwner()
+                                .HasForeignKey("ProductId");
+                        });
+
+                    b.Navigation("OperatorInfo")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
