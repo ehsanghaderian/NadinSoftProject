@@ -12,12 +12,12 @@ namespace Application.Features.ProductFeatures.Commands.Handlers
 {
     public class AddProductCommandHandler : IRequestHandler<AddProductCommand>
     {
-        public readonly IProductRepository _productWriteRepository;
+        public readonly IProductRepository _productRepository;
         public readonly IUnitOfWork _unitOfWork;
 
         public AddProductCommandHandler(IProductRepository productWriteRepository, IUnitOfWork unitOfWork)
         {
-            _productWriteRepository = productWriteRepository;
+            _productRepository = productWriteRepository;
             _unitOfWork = unitOfWork;
         }
 
@@ -27,7 +27,7 @@ namespace Application.Features.ProductFeatures.Commands.Handlers
 
             var newProduct = new Product(request.Name, request.ProduceDate, request.ManufacturerPhone, request.ManufacturerEmail, request.IsAvailable, request.CommandSender.UserId, request.CommandSender.Name);
 
-            _productWriteRepository.Add(newProduct);
+            _productRepository.Add(newProduct);
 
             await _unitOfWork.SaveChangesAsync();
 
@@ -36,7 +36,7 @@ namespace Application.Features.ProductFeatures.Commands.Handlers
 
         private async Task CheckExistProduct(string email, DateTime produceDate)
         {
-            var existProduct = await _productWriteRepository.ExistsProductWithEmailOrProduceDate(email, produceDate);
+            var existProduct = await _productRepository.ExistsProductWithEmailOrProduceDate(email, produceDate);
 
             if (existProduct)
                 throw new ApplicationServiceBadRequestException("محصولی با این مشخصات موجود می باشد");

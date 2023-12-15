@@ -14,18 +14,18 @@ namespace Application.Features.ProductFeatures.Commands.Handlers
 {
     public class UpdateProductCommandHandler : IRequestHandler<UpdateProductCommand>
     {
-        public readonly IProductRepository _productWriteRepository;
+        public readonly IProductRepository _productRepository;
         public readonly IUnitOfWork _unitOfWork;
 
         public UpdateProductCommandHandler(IProductRepository productWriteRepository, IUnitOfWork unitOfWork)
         {
-            _productWriteRepository = productWriteRepository;
+            _productRepository = productWriteRepository;
             _unitOfWork = unitOfWork;
         }
 
         public async Task<Unit> Handle(UpdateProductCommand request, CancellationToken cancellationToken)
         {
-            var product = await _productWriteRepository.GetByIdAsync(request.Id);
+            var product = await _productRepository.GetByIdAsync(request.Id);
             if (product is null)
                 throw new ApplicationServiceNotFoundException("محصول مورد نظر یافت نشد");
 
